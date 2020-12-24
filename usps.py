@@ -110,6 +110,7 @@ def uspsTracking(tracker):
         except:
             print(f"Cannot determine distance between {startZip.city} and {currentZip.city} at this time.")
             retStr += f"Cannot determine distance between {startZip.city} and {currentZip.city} at this time.\n"
+
     #find how long package has been in transit
     dateTuples = []
     for date in dateDict.keys():

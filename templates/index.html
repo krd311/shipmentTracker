@@ -5,7 +5,15 @@
     body{
     font-family: Helverica, sans-serif;
     }
+    .center{
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+    }
     </style>
+    <div class="center">
     <title>trackr</title>
     </head>
     <body style = "background-color:ghostwhite;">
@@ -19,6 +27,7 @@
         {{status}}
         {% endautoescape %}
     </p>
+    </div>
 
     </form>
     </body>
