@@ -5,12 +5,16 @@ import mpu
 import datetime
 
 def uspsTracking(tracker):
+    retStr = ''
     #attempt to contact usps
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
     url = f'https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1={tracker}'
 
-    response = requests.get(url, headers=headers)
-    soup = BeautifulSoup(response.content, "html.parser")
+    try:
+        response = requests.get(url, headers=headers)
+        soup = BeautifulSoup(response.content, "html.parser")
+    except:
+        print("Unable to contact USPS. Try again.")
 
     #remove newlines from children list
     html = list(soup.children)
@@ -100,10 +104,12 @@ def uspsTracking(tracker):
         try:
             distance = mpu.haversine_distance((startLat,startLong),(currentLat,currentLong))
             print(f'Your package has traveled {distance:.2f} km.')
+            retStr += f'Your package has traveled {distance:.2f} km.\n'
             print(f'Your package has traveled {distance * 0.621371:.2f} mi.')
+            retStr += f'Your package has traveled {distance * 0.621371:.2f} mi.\n'
         except:
             print(f"Cannot determine distance between {startZip.city} and {currentZip.city} at this time.")
-
+            retStr += f"Cannot determine distance between {startZip.city} and {currentZip.city} at this time.\n"
     #find how long package has been in transit
     dateTuples = []
     for date in dateDict.keys():
@@ -118,4 +124,7 @@ def uspsTracking(tracker):
     sendDate = datetime.date(dateTuples[-1][0], dateTuples[-1][1], dateTuples[-1][2])
     days = currentDate - sendDate
     print(f"Your package has been in transit for {days.days} days.")
+    retStr += f"Your package has been in transit for {days.days} days.\n"
     print(f"Your package's current status is {currentStatus.lower()}!")
+    retStr += f"Your package's current status is {currentStatus.lower()}!"
+    return retStr

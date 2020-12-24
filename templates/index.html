@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+    <style>
+    body{
+    font-family: Helverica, sans-serif;
+    }
+    </style>
+    <title>trackr</title>
+    </head>
+    <body style = "background-color:ghostwhite;">
+	<h1>Package tracking</h1>
+    <form method = "POST">
+        <p>Enter tracking code:</p>
+        <input name = "u">
+        <input type = "submit">
+    </form>
+    <p>{% autoescape false %}
+        {{status}}
+        {% endautoescape %}
+    </p>
+    </body>
+</html>
