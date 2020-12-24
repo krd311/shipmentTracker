@@ -11,6 +11,8 @@ def home():
 def enterTracker():
     text = request.form["u"]
     processed_text = main.main(text)
+    if processed_text == "error 1":
+        return render_template("index.html", status = f"Error: No tracking could be found for {text}.\n\n Please try again.")
     processed_text[0] += "\n"
     return render_template("index.html", status =f"Tracking history for {text.strip()}:<br><br>" + processed_text[1].replace("\n","<br><br>") + processed_text[0].replace("\n","<br>") + '<br>')
 

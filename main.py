@@ -6,10 +6,12 @@ def main(tr):
 
     if 20 <= len(tracker) <= 35:
         return uspsTracking(tracker)
-    if len(tracker) == 18:
+    elif len(tracker) == 18:
         pass
-    if 12 <= len(tracker) <= 14:
+    elif 12 <= len(tracker) <= 14:
         pass
+    else:
+        return "error 1"
 
     #remove spaces from tracking code if any are present
     tracker = list(tracker)

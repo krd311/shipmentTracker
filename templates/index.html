@@ -5,25 +5,36 @@
     body{
     font-family: Helverica, sans-serif;
     }
+
     .center{
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     }
+
     .scroll{
     overflow:auto;
     height:556px;
     width:564px;
     }
+
+    .rounded{
+    border-radius: 20px;
+    background: silver;
+    padding: 15px;
+    width: 556px;
+    height: 564px;
+    }
     </style>
     <div style="position:fixed; top:10%; left:50%; transform:translate(-50%, -50%)">
-    <h1>Package tracking</h1>
+        <h1>Package tracking</h1>
     </div>
-    <div class="center scroll">
+    <div class="center">
     <title>trackr</title>
-    </head>
+</head>
     <body style = "background-color:ghostwhite;">
+    <div class = "center scroll rounded">
     <form method = "POST">
         <p>Enter tracking code:</p>
         <input name = "u">
@@ -33,6 +44,7 @@
         {{status}}
         {% endautoescape %}
     </p>
+    </div>
     </div>
 
     </form>
