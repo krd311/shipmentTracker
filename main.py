@@ -10,15 +10,15 @@ carrier = None
 tracker = "9405 5282 0633 4175 3733 06"
 
 if 20 <= len(tracker) <= 35:
-    carrier = "usps"
+    uspsTracking(tracker)
 if len(tracker) == 18:
-    carrier = "ups"
+    pass
 if 12 <= len(tracker) <= 14:
-    carrier = "fedex"
+    pass
+
+#remove spaces from tracking code if any are present
 tracker = list(tracker)
 while " " in tracker.copy():
     tracker.remove(" ")
 str(tracker)
 
-if carrier == "usps":
-    uspsTracking(tracker)

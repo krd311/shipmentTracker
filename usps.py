@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 from uszipcode import SearchEngine
 import mpu
+import datetime
 
 def uspsTracking(tracker):
     #attempt to contact usps
@@ -29,8 +30,8 @@ def uspsTracking(tracker):
     strConv = strConv.split("\t")
     copied = list()
     dateDict = dict()
-    months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug" \
-              "Sep", "Oct", "Nov", "Dec"]
+    months = {"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6, "Jul": 7, "Aug": 8, \
+              "Sep": 9, "Oct": 10, "Nov": 11, "Dec":12}
 
     for item in strConv.copy():
         if item == "":
@@ -103,4 +104,18 @@ def uspsTracking(tracker):
         except:
             print(f"Cannot determine distance between {startZip.city} and {currentZip.city} at this time.")
 
+    #find how long package has been in transit
+    dateTuples = []
+    for date in dateDict.keys():
+        month, day, year = date.split()
+        if year[-1] == ",":
+            year = year[:-1]
+        if day[-1] == ",":
+            day = day[:-1]
+        month = months[month[:3]]
+        dateTuples.append((int(year), int(month), int(day)))
+    currentDate = datetime.date.today()
+    sendDate = datetime.date(dateTuples[-1][0], dateTuples[-1][1], dateTuples[-1][2])
+    days = currentDate - sendDate
+    print(f"Your package has been in transit for {days.days} days.")
     print(f"Your package's current status is {currentStatus.lower()}!")
