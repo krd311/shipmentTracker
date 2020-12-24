@@ -11,8 +11,8 @@ def home():
 def enterTracker():
     text = request.form["u"]
     processed_text = main.main(text)
-    processed_text += "\n"
-    return render_template("index.html", status = processed_text.replace("\n","<br>") + f"Tracking history for <strong>{text}</strong>:<br><br>")
+    processed_text[0] += "\n"
+    return render_template("index.html", status =f"Tracking history for {text.strip()}:<br><br>" + processed_text[1].replace("\n","<br><br>") + processed_text[0].replace("\n","<br>") + '<br>')
 
 if __name__ == "__main__":
     app.run()

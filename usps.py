@@ -5,7 +5,7 @@ import mpu
 import datetime
 
 def uspsTracking(tracker):
-    retStr = ''
+    retStr, fullHist = '', ''
     #attempt to contact usps
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
     url = f'https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1={tracker}'
@@ -77,11 +77,14 @@ def uspsTracking(tracker):
     for day in dateDict:
         if day[-1] == ",":
             print(day[:-1])
+            fullHist += f"<strong>{str(day[:-1])}</strong>\n"
         else:
             print(day)
+            fullHist += f"<strong>{str(day)}</strong>\n"
         for event in dateDict[day]:
             if event != "":
                 print(event)
+                fullHist += event + "\n"
             try:
                 int(event[-6:])
                 if event[-6:].split()[0] not in zipList:
@@ -128,4 +131,4 @@ def uspsTracking(tracker):
     retStr += f"Your package has been in transit for {days.days} days.\n"
     print(f"Your package's current status is {currentStatus.lower()}!")
     retStr += f"Your package's current status is {currentStatus.lower()}!"
-    return retStr
+    return [retStr,fullHist]
