@@ -9,10 +9,9 @@ def home():
 @app.route("/", methods = ["POST"])
 def enterTracker():
     text = request.form["u"]
-    print("ajojdfjgsdfjgo",text)
     processed_text = main.main(text)
     processed_text += "\n"
-    return render_template("index.html", status = processed_text.replace("\n","<br>"))
+    return render_template("index.html", status = f"Tracking history for <strong>{text}</strong>:<br><br>" + processed_text.replace("\n","<br>"))
 
 if __name__ == "__main__":
     app.run()
