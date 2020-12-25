@@ -14,8 +14,4 @@ def main(tr):
         return "error 1"
 
     #remove spaces from tracking code if any are present
-    tracker = list(tracker)
-    while " " in tracker.copy():
-        tracker.remove(" ")
-    str(tracker)
-
+    tracker.replace(" ","")
