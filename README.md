@@ -1,2 +1,2 @@
 # shipmentTracker
-An web app that makes tracking your packages easier and convenient! 
+A web app that makes tracking your packages easier and convenient! 
